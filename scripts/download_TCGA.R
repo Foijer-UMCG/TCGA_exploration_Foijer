@@ -1,7 +1,7 @@
 here::i_am("scripts/download_TCGA.R")
 
 download_dataset <- function(dataset_name,
-                             download_dir,
+                             data_dir,
                              transcriptome = FALSE,
                              CNV = FALSE,
                              protein = FALSE,
@@ -9,54 +9,73 @@ download_dataset <- function(dataset_name,
                              force = FALSE,
                              verbose = TRUE){
 
-  dir.create(download_dir,
+  # modality map for query configuration
+  modality_map <- list(
+    transcriptome = list(
+      data_category = "Transcriptome Profiling",
+      data_type = "Gene Expression Quantification"
+    ),
+    CNV = list(
+      data_category = "Copy Number Variation",
+      data_type = "Copy Number Segment"
+    ),
+    protein = list(
+      data_category = "Proteome Profiling",
+      data_type = "Protein Expression Quantification"
+    )
+  )
+
+  # links the TRUE/FALSE values from the user to keys in
+  # in the modality map
+  modalities <- list(transcriptome = transcriptome,
+                     CNV = CNV,
+                     protein = protein)
+
+  # creates the directory for downloading the data if not present
+  dir.create(data_dir,
              recursive = TRUE,
              showWarnings = verbose)
-
-  #TODO want to loop over the data modalities using their name,
-  # maybe use a dataframe for this?
-  modalities <- c(transcriptome,
-                  CNV,
-                  protein,
-                  clinical)
 
   if (verbose){
     #TODO does glue work properly like this?
     glue::glue("Starting downloads for {dataset_name}")
   }
 
-  # this loop currently doesn't make sense
-  for (data_mode in modalities){
-    #TODO wrap this in a tryCatch, as it can throw an error
-    # if the data is not available
+  for (mod in names(modalities)){
+    # early exit if FALSE
+    if (isFALSE(modalities[[mod]])){
+      next
+    }
+    query_vars <- modality_map[[mod]]
     query <- create_query(dataset_name = dataset_name,
-                          modality = data_mode)
+                          data_category = query_vars$data_category,
+                          data_type = query_vars$data_type)
 
-    # want to save the query for later use to check integrity
-    #TODO finish the path for saving the data
-    saveRDS(query,
-            file = file.path(download_dir,
-                             ))
+    #TODO fix the pathing here
+    saveRDS(object = query,
+            file = data_dir)
 
     if (verbose){
       glue::glue("Downloading modality {data_mode} for dataset {dataset_name}")
     }
 
-    #TODO check whether this download dest is correct
     TCGAbiolinks::GDCdownload(query = query,
                               method = "api",
-                              directory = download_dir)
+                              directory = data_dir,
+                              # 1 file per chunk for stability
+                              files.per.chunk = 1)
+    if (verbose){
+      glue::glue("Finished downloading modality {data_mode} for dataset {dataset_name}")
+    }
   }
 }
 
-#TODO need to automatically determine the data.type argument
-# for a completely correct query
 create_query <- function(dataset_name,
-                         modality){
+                         data_category,
+                         data_type){
 
   query <- TCGAbiolinks::GDCquery(project = dataset_name,
                                   data.category = modality)
 
   return(query)
-
 }
