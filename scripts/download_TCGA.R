@@ -1,4 +1,4 @@
-here::i_am("scripts/download_TCGA.R")
+# here::i_am("scripts/download_TCGA.R")
 
 download_dataset <- function(dataset_name,
                              data_dir,
@@ -37,7 +37,6 @@ download_dataset <- function(dataset_name,
              showWarnings = verbose)
 
   if (verbose){
-    #TODO does glue work properly like this?
     glue::glue("Starting downloads for {dataset_name}")
   }
 
@@ -51,9 +50,12 @@ download_dataset <- function(dataset_name,
                           data_category = query_vars$data_category,
                           data_type = query_vars$data_type)
 
-    #TODO fix the pathing here
+    #TODO test whether this pathing is actually correct
     saveRDS(object = query,
-            file = data_dir)
+            file = file.path(data_dir,
+                             dataset_name,
+                             mod,
+                             "_query.Rds"))
 
     if (verbose){
       glue::glue("Downloading modality {data_mode} for dataset {dataset_name}")
@@ -75,7 +77,8 @@ create_query <- function(dataset_name,
                          data_type){
 
   query <- TCGAbiolinks::GDCquery(project = dataset_name,
-                                  data.category = modality)
+                                  data.category = data_category,
+                                  data.type = data_type)
 
   return(query)
 }

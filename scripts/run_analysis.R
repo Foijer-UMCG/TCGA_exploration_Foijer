@@ -16,22 +16,30 @@ dotenv::load_dot_env(file.path(here::here(),
 # parses some of the env options for the download script
 dataset_name <- Sys.getenv("DATASET_NAME")
 data_dir <- Sys.getenv("DATA_DIR")
-clinical <- Sys.getenv("CLINICAL")
-CNV <- Sys.getenv("CNV")
-transcriptome <- Sys.getenv("TRANSCRIPTOME")
-protein <- Sys.getenv("PROTEIN")
-verbose <- Sys.getenv("VERBOSE")
-force <- Sys.getenv("FORCE")
+clinical <- as.logical(Sys.getenv("CLINICAL"))
+CNV <- as.logical(Sys.getenv("CNV"))
+transcriptome <- as.logical(Sys.getenv("TRANSCRIPTOME"))
+protein <- as.logical(Sys.getenv("PROTEIN"))
+verbose <- as.logical(Sys.getenv("VERBOSE"))
+force <- as.logical(Sys.getenv("FORCE"))
+download <- as.logical(Sys.getenv("DOWNLOAD_DATA"))
 
 # starts by downloading data (if required)
-download_dataset(dataset_name = dataset_name,
-                 data_dir = data_dir,
-                 transcriptome = transcriptome,
-                 CNV = CNV,
-                 protein = protein,
-                 clinical = clinical,
-                 force = force,
-                 verbose = verbose)
+if (download){
+  download_dataset(dataset_name = dataset_name,
+                   data_dir = data_dir,
+                   transcriptome = transcriptome,
+                   CNV = CNV,
+                   protein = protein,
+                   clinical = clinical,
+                   force = force,
+                   verbose = verbose)
+}
+
+# more parsing for the preprocessing steps
+gene_1 <- Sys.getenv("GENE_1")
+gene_2 <- Sys.getenv("GENE_2")
+GSEA <- Sys.getenv("GSEA")
 
 # then we preprocess the data if required, based on user input
 preprocess_data()
