@@ -29,20 +29,37 @@ download_dataset <- function(dataset_name,
   # in the modality map
   modalities <- list(transcriptome = transcriptome,
                      CNV = CNV,
-                     protein = protein)
+                     protein = protein,
+                     clinical = clinical)
 
   # creates the directory for downloading the data if not present
-  dir.create(data_dir,
-             recursive = TRUE,
-             showWarnings = verbose)
+  download_dir <- file.path(data_dir,
+                            dataset_name)
+  if (dir.exists(download_dir) & !force) {
+    msg <- glue::glue("Data already seems to be downloaded - feel free to continue workflow!")
+    print(msg)
+    return("")
+  }else{
+    dir.create(download_dir,
+               recursive = TRUE,
+               showWarnings = verbose)
+  }
 
   if (verbose){
-    glue::glue("Starting downloads for {dataset_name}")
+    msg <- glue::glue("Starting downloads for {dataset_name}")
+    print(msg)
   }
 
   for (mod in names(modalities)){
     # early exit if FALSE
     if (isFALSE(modalities[[mod]])){
+      next
+    # clinical only needs to save the query, as that has all the info
+    }else if(mod == "clinical"){
+      query <- TCGAbiolinks::GDCquery_clinic(project = dataset_name)
+      saveRDS(object = query,
+              file = file.path(download_dir,
+                               "clinical_query.Rds"))
       next
     }
     query_vars <- modality_map[[mod]]
@@ -50,24 +67,23 @@ download_dataset <- function(dataset_name,
                           data_category = query_vars$data_category,
                           data_type = query_vars$data_type)
 
-    #TODO test whether this pathing is actually correct
     saveRDS(object = query,
-            file = file.path(data_dir,
-                             dataset_name,
-                             mod,
-                             "_query.Rds"))
+            file = file.path(download_dir,
+                             paste0(mod, "_query.Rds")))
 
     if (verbose){
-      glue::glue("Downloading modality {data_mode} for dataset {dataset_name}")
+      msg <- glue::glue("Downloading modality {mod} for dataset {dataset_name}")
+      print(msg)
     }
 
     TCGAbiolinks::GDCdownload(query = query,
                               method = "api",
-                              directory = data_dir,
-                              # 1 file per chunk for stability
+                              directory = download_dir,
+                              # 1 file per chunk for stability, might want to change for speedup
                               files.per.chunk = 1)
     if (verbose){
-      glue::glue("Finished downloading modality {data_mode} for dataset {dataset_name}")
+      msg <- glue::glue("Finished downloading modality {mod} for dataset {dataset_name}")
+      print(msg)
     }
   }
 }

@@ -3,23 +3,30 @@ title: "run_analysis"
 output: html_document
 ---
 
+```{r cleaning, echo=FALSE}
+rm(list = ls())
+```
+
 ```{r sourcing, echo=FALSE}
 here::i_am("run_analysis.Rmd")
 
-# source all the scripts required for the pipeline
+# source a script to easily source everything else
 source(file.path(here::here(),
                  "scripts",
                  "utils",
                  "sourcing.R"))
 
+# sourcing the main scripts and smaller utils
 sourceDir(path = file.path(here::here(),
                            "scripts"))
+sourceDir(path = file.path(here::here(),
+                           "scripts",
+                           "utils"))
 
 # reads all the config options into "env"
 dotenv::load_dot_env(file.path(here::here(),
                                "config.env"))
 ```
-
 
 ```{r download options, echo=FALSE}
 # parses some of the env options for the download script
@@ -34,9 +41,10 @@ force <- as.logical(Sys.getenv("FORCE"))
 download <- as.logical(Sys.getenv("DOWNLOAD_DATA"))
 ```
 
-```{r download data, echo = TRUE}
+```{r download data, echo=FALSE}
 # starts by downloading data (if required)
 if (download){
+  #TODO add internal check for download_dataset if the data already exists
   download_dataset(dataset_name = dataset_name,
                    data_dir = data_dir,
                    transcriptome = transcriptome,
@@ -48,19 +56,29 @@ if (download){
 }
 ```
 
-```{r preprocessing options}
+```{r preprocessing options, echo=FALSE}
 # more parsing for the preprocessing steps
 gene_1 <- Sys.getenv("GENE_1")
 gene_2 <- Sys.getenv("GENE_2")
-GSEA <- Sys.getenv("GSEA")
+GSEA <- as.logical(Sys.getenv("GSEA"))
+samples <- Sys.getenv("SAMPLES_SELECTED")
+run_name <- Sys.getenv("RUN_NAME")
 ```
 
-
-```{r preprocessing, echo = TRUE}
-preprocess_data()
+```{r preprocessing, echo=TRUE}
+data <- process_data(run_name = run_name,
+             gene_1 = gene_1,
+             gene_2 = gene_2,
+             GSEA = GSEA,
+             transcriptome = transcriptome,
+             CNV = CNV,
+             protein = protein,
+             samples = samples,
+             data_dir = data_dir,
+             dataset_name = dataset_name,
+             verbose = verbose)
 ```
 
 ```{r plotting}
-plot_results()
+plot_results(data = data)
 ```
-
