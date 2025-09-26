@@ -80,5 +80,15 @@ data <- process_data(run_name = run_name,
 ```
 
 ```{r plotting}
-plot_results(data = data)
+results_dir <- file.path(data_dir,
+                         dataset_name,
+                         run_name,
+                         "plots")
+
+plot_results(data = data,
+             results_dir = results_dir,
+             gene_1 = gene_1,
+             gene_2 = gene_2,
+             dataset_name = dataset_name)
 ```
+

@@ -115,6 +115,20 @@ process_data <- function(run_name,
     colnames(data_presence) <- append(names, gene_2)
   }
 
+  # makes the aneuploidy split for categorising
+  # defines the aneu_division
+  q <- stats::quantile(data_presence$aneuploidy,
+                       probs = c(0.30, 0.70),
+                       na.rm = TRUE)
+
+  # and adds as factors in the dataframe
+  data_presence$aneu_factor <- as.integer(data_presence$aneuploidy>= q[2]) +
+    as.integer(data_presence$aneuploidy>= q[1])
+  data_presence$aneu_factor <- factor(data_presence$aneu_factor,
+                                      levels = c(0, 1, 2),
+                                      labels = c("low", "middle", "high"))
+
+
   # we save the dataframe into the run directory
   saveRDS(object = data_presence,
           file = file.path(results_dir,
