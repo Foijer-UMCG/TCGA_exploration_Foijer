@@ -128,8 +128,7 @@ process_data <- function(run_name,
                                       levels = c(0, 1, 2),
                                       labels = c("low", "middle", "high"))
 
-
-  # we save the dataframe into the run directory
+  # we save the dataframe into the run directory for troubleshooting if needed
   saveRDS(object = data_presence,
           file = file.path(results_dir,
                            "data_filtered.Rds"))
@@ -137,25 +136,3 @@ process_data <- function(run_name,
   # and return the data to the main workflow
   return(data_presence)
 }
-
-
-# Should also move this to a utils file
-get_gene_expression <- function(gene_name = NULL,
-                                exp_paths){
-  #TODO update this into something more consistent
-  # not sure if the current implementation works nice with config
-  if(is.null(gene_name)){
-    glue::glue("Gene name is NULL, make sure to give a genename")
-    return(FALSE)
-  }
-
-  # loads the expression data and extracts the gene of interest
-  gene_expression <- purrr::map_dbl(exp_paths, function(path) {
-    exp_data <- load_transcriptome(path)
-    exp_data[exp_data$gene_name == gene_name, ]$fpkm_unstranded
-  },
-  .progress = paste0(gene_name, "_exp_extraction"))
-
-  return(gene_expression)
-}
-

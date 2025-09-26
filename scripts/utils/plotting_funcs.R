@@ -24,7 +24,8 @@ plot_gene_distro <- function(data, gene, plot_name = FALSE, cancer_type, return 
       unit = "in",
       width = 14,
       height = 7,
-      create.dir = T)
+      create.dir = TRUE,
+      useDingbat = FALSE)
 
     RDS_name <- tools::file_path_sans_ext(plot_name)
     RDS_name <- glue::glue(RDS_name, ".Rds")
@@ -52,7 +53,8 @@ plot_exp_boxplots <- function(data, gene, cancer_type, plot_name = FALSE, return
       comparisons = comparisons,
       label = "p.signif"
     ) +
-    ggpubr::stat_compare_means(label.y = 50) +
+    ggpubr::stat_compare_means(label.x.npc = "top",
+                               label.y.npc = "left") +
     ggplot2::theme(text = ggplot2::element_text(size = 20),
                    axis.title = ggplot2::element_text(size = 20))
 
@@ -65,7 +67,8 @@ plot_exp_boxplots <- function(data, gene, cancer_type, plot_name = FALSE, return
       unit = "in",
       width = 14,
       height = 7,
-      create.dir = T
+      create.dir = TRUE,
+      useDingbats = FALSE
     )
     RDS_name <- tools::file_path_sans_ext(plot_name)
     RDS_name <- glue::glue(RDS_name, ".Rds")
@@ -76,13 +79,6 @@ plot_exp_boxplots <- function(data, gene, cancer_type, plot_name = FALSE, return
 }
 
 plot_genes <- function(df, gene1, gene2, plot_name = FALSE, cancer_type, return = FALSE) {
-  my_lims <- range(
-    c(
-      df[[gene1]],
-      df[[gene2]]
-    ),
-    na.rm = TRUE
-  )
 
   p <- ggpubr::ggscatter(df,
                          x = gene1,
@@ -99,11 +95,6 @@ plot_genes <- function(df, gene1, gene2, plot_name = FALSE, cancer_type, return 
                          xlab = sprintf("%s (FPKM)", gene1),
                          ylab = sprintf("%s (FPKM)", gene2)
   ) +
-    # locks the plot to 1:1 axis scaling
-    ggplot2::coord_cartesian(
-      xlim = my_lims,
-      ylim = my_lims
-    ) +
     ggplot2::theme(axis.text = ggplot2::element_text(size = 20),
                    axis.title = ggplot2::element_text(size = 20))
 
@@ -117,7 +108,8 @@ plot_genes <- function(df, gene1, gene2, plot_name = FALSE, cancer_type, return 
       unit = "in",
       width = 7,
       height = 7,
-      create.dir = T
+      create.dir = TRUE,
+      useDingbats = FALSE
     )
     RDS_name <- tools::file_path_sans_ext(plot_name)
     RDS_name <- glue::glue(RDS_name, ".Rds")
@@ -158,7 +150,8 @@ plot_aneu_gene_scatter <- function(data, gene, aneuploidy, plot_name = FALSE, ca
       unit = "in",
       width = 7,
       height = 7,
-      create.dir = T
+      create.dir = TRUE,
+      useDingbats = FALSE
     )
     RDS_name <- tools::file_path_sans_ext(plot_name)
     RDS_name <- glue::glue(RDS_name, ".Rds")

@@ -6,7 +6,7 @@ calc_aneuploidy <- function(seg_means,
                             rounded = FALSE,
                             base_ploidy = 2) {
   # converts the seg means to copy numbers
-  CN <- (2^seg_means) * 2
+  CN <- (2^seg_means) * base_ploidy
 
   # rounds to discrete if flagged - more true to the biology
   if (rounded) {
@@ -90,4 +90,23 @@ check_data_presence <- function(dataframe,
   colnames(data_locs) <- c("ID", col_name)
 
   return(data_locs)
+}
+
+get_gene_expression <- function(gene_name = NULL,
+                                exp_paths){
+  #TODO update this into something more consistent
+  # not sure if the current implementation works nice with config
+  if(is.null(gene_name)){
+    glue::glue("Gene name is NULL, make sure to give a genename")
+    return(FALSE)
+  }
+
+  # loads the expression data and extracts the gene of interest
+  gene_expression <- purrr::map_dbl(exp_paths, function(path) {
+    exp_data <- load_transcriptome(path)
+    exp_data[exp_data$gene_name == gene_name, ]$fpkm_unstranded
+  },
+  .progress = paste0(gene_name, "_exp_extraction"))
+
+  return(gene_expression)
 }
