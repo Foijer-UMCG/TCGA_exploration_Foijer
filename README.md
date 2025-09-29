@@ -1,8 +1,22 @@
+## Does this file look bad? Press the "Visual" button top left in Rstudio to get a better view.
+
 ## TCGA exploration workflow for Foijer lab \@ UMCG
 
 Scripts for downloading, processing and plotting data from the TCGA/GDC. Specifically made in the context of using aneuploidy and matched RNA / genomic data for discovery of gene correlates to aneuploidy and Chromosomal INstability (CIN).
 
 Made by Alex van Kaam, PhD student. README last updated 26-09-2025
+
+## Running the workflow
+
+Before running the workflow, it is important that you edit any of the required fields in the config.env file. The config.env file should be in the same directory as this README.md. The most important are:
+
+1.  DATA_DIR: where the data for TCGA is (or will be) downloaded. When running on the Aneufinder Desktop, this is already correctly configured.
+2.  RUN_NAME: the name of your running. Exact instruction for how to format the name can be found in the config.env file.
+3.  GENE_1/2: Which genes you want to use for correlation to aneuploidy. GENE_1 is required, GENE_2 is optional.
+
+Since we're running this on a desktop with multiple version of R, I ended up hacking together things a little bit to ensure I didn't change any package installs of other R versions on the desktop. To run the workflow, you'll need to run the *`run_analysis.sh`* script using a terminal. To do so, open a terminal in the directory where this README.md and the `run_analysis.sh` script are located. You can then type `./run_analysis.sh` to start Rstudio with the correct version of R.
+
+Once you've got Rstudio running, navigate to the *`run_analysis.Rmd`* markdown document. In the top right of the coding window of Rstudio there's a "run" button. Select that, and then press "Run All". The keyboard shortcut for this is Ctrl+Alt+R.
 
 ## How metrics are calculated
 
