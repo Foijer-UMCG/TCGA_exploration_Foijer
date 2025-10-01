@@ -7,19 +7,11 @@
 #          current working directory.
 # -----------------------------
 
-# 1. Load environment variables (your R path, etc.)
+# load environment variables 
 source config.env
 
-# 2. Define the project root (adjust this to your actual project folder)
-PROJECT_ROOT="/home/alexvkaam/Desktop/data_shared/TCGA_exploration"
+# runs using specified R version and logs
+rig run --script run_analysis.R --r-version 4.5.0 2>&1 | tee output.log
 
-# 3. Move to project root
-cd "$PROJECT_ROOT" || { echo "Project root not found! Exiting."; exit 1; }
-
-# 4. Path to the R script you want to run
-SCRIPT="run_analysis.R"  # change if your script has a different name
-
-# 5. Run the script using the correct R version and activate renv
-rig run --script "$SCRIPT" --r-version 4.5.0 2>&1 | tee output.log
-
-#TODO move the output.log to the directory where we save everything!
+# copies log to run directory
+cp output.log $DATA_DIR/$DATASET_NAME/$RUN_NAME

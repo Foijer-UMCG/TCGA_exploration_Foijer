@@ -37,8 +37,7 @@ download_dataset <- function(dataset_name,
                             dataset_name)
   if (dir.exists(download_dir) & !force) {
     msg <- glue::glue("Data is already downloaded - workflow continues.")
-    print(msg)
-    return("")
+    return(msg)
   }else{
     dir.create(download_dir,
                recursive = TRUE,
@@ -86,6 +85,7 @@ download_dataset <- function(dataset_name,
       print(msg)
     }
   }
+  return("Finished downloading data")
 }
 
 create_query <- function(dataset_name,

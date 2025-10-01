@@ -1,0 +1,135 @@
+here() starts at /mnt/data/data_shared/TCGA_exploration
+[1] "Loaded the config"
+Data is already downloaded - workflow continues.
+[1] "Normal TCGA dataset detected, setting normal flags."
+STAT1_exp_extraction ■■                                 2% |  ETA:  3m
+STAT1_exp_extraction ■■                                 3% |  ETA:  3m
+STAT1_exp_extraction ■■                                 5% |  ETA:  3m
+STAT1_exp_extraction ■■■                                7% |  ETA:  3m
+STAT1_exp_extraction ■■■■                               9% |  ETA:  3m
+STAT1_exp_extraction ■■■■                              10% |  ETA:  3m
+STAT1_exp_extraction ■■■■■                             12% |  ETA:  3m
+STAT1_exp_extraction ■■■■■                             14% |  ETA:  3m
+STAT1_exp_extraction ■■■■■■                            16% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■                            17% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■                           19% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■                           21% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■                          23% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■                          25% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■                         26% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■                         28% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■                        30% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■                       32% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■                       34% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■                      35% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■                      37% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■■                     39% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■■                     41% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■■■                    43% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■■■                    44% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■                   46% |  ETA:  2m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■                   48% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■                  50% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■                  52% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■                 53% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■                55% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■                57% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■               59% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■               60% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■              62% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■              64% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■             66% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■             68% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■            69% |  ETA:  1m
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■            71% |  ETA: 49s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■           73% |  ETA: 46s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA: 43s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■          77% |  ETA: 40s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■         78% |  ETA: 37s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■         80% |  ETA: 34s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■        82% |  ETA: 31s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■        84% |  ETA: 28s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% |  ETA: 25s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% |  ETA: 22s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      89% |  ETA: 19s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      91% |  ETA: 16s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     93% |  ETA: 12s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     94% |  ETA:  9s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% |  ETA:  6s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% |  ETA:  3s
+STAT1_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■  100% |  ETA:  0s
+ZBTB33_exp_extraction ■                                  2% |  ETA:  3m
+ZBTB33_exp_extraction ■■                                 3% |  ETA:  3m
+ZBTB33_exp_extraction ■■■                                5% |  ETA:  3m
+ZBTB33_exp_extraction ■■■                                7% |  ETA:  3m
+ZBTB33_exp_extraction ■■■■                               9% |  ETA:  3m
+ZBTB33_exp_extraction ■■■■                              10% |  ETA:  3m
+ZBTB33_exp_extraction ■■■■■                             12% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■                             14% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■                            16% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■                            17% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■                           19% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■                           21% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■                          23% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■                          25% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■                         27% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■                         28% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■                        30% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■                       32% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■                       34% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■                      36% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■                      37% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■                     39% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■                     41% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■                    43% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■                    44% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■                   46% |  ETA:  2m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■                   48% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■                  50% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■                  52% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■                 53% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■                55% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■                57% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■               59% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■               60% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■              62% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■              64% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■             66% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■             68% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■            69% |  ETA:  1m
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■            71% |  ETA: 49s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■           73% |  ETA: 46s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■           75% |  ETA: 43s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■          76% |  ETA: 40s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■          78% |  ETA: 37s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■         80% |  ETA: 34s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■        82% |  ETA: 31s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■        83% |  ETA: 28s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■       85% |  ETA: 25s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■       87% |  ETA: 22s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      89% |  ETA: 19s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■      90% |  ETA: 16s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     92% |  ETA: 13s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■     94% |  ETA: 10s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    96% |  ETA:  7s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■    98% |  ETA:  4s
+ZBTB33_exp_extraction ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■   99% |  ETA:  1s
+Warning message:
+In dir.create(results_dir, showWarnings = verbose) :
+  '/media/alexvkaam/T7/TCGA_data/TCGA-BRCA/2025_10_01_AK_STAT1_ZBTB33' already exists
+[1] FALSE
+[1] "Wrote raw data to output directory"
+[1] "/media/alexvkaam/T7/TCGA_data/TCGA-BRCA/2025_10_01_AK_STAT1_ZBTB33/plots/STAT1_expression.pdf"
+Plotting STAT1 expression density
+Plotting STAT1 expression boxplot
+Plotting STAT1 against aneuploidy scatterplot
+Plotting ZBTB33 expression density
+Plotting ZBTB33 expression boxplots
+Plotting ZBTB33 against aneuploidy scatterplot
+Plotting STAT1 expression against ZBTB33 expression
+Warning message:
+In dir.create(results_dir, showWarnings = TRUE, recursive = TRUE) :
+  '/media/alexvkaam/T7/TCGA_data/TCGA-BRCA/2025_10_01_AK_STAT1_ZBTB33/plots' already exists
+[1] "Finished plotting for 2 genes"
+Done! You can find your plots in:
+/media/alexvkaam/T7/TCGA_data/TCGA-BRCA/2025_10_01_AK_STAT1_ZBTB33/plots

@@ -1,5 +1,9 @@
 # required for %>%
-library(dplyr)
+# lot of silencing here, for easier log reading of non-coding users
+library(dplyr, 
+        quietly = TRUE, 
+        verbose = FALSE,
+        warn.conflicts = FALSE)
 
 calc_aneuploidy <- function(seg_means,
                             lengths,

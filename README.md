@@ -4,14 +4,14 @@
 
 Scripts for downloading, processing and plotting data from the TCGA/GDC. Specifically made in the context of using aneuploidy and matched RNA / genomic data for discovery of gene correlates to aneuploidy and Chromosomal INstability (CIN).
 
-Made by Alex van Kaam, PhD student. README last updated 30-09-2025
+Made by Alex van Kaam, PhD student. README last updated 01-10-2025
 
 ## Running the workflow
 
-Before running the workflow, it is important that you edit any of the required fields in the config.env file. The config.env file should be in the same directory as this README.md. The most important are:
+Before running the workflow, it is important that you edit any of the required fields in the config.env file. The `config.env` file should be in the same directory as this `README.md`. The most important are:
 
 1.  RUN_NAME\
-    The name of your run. Exact instruction for how to format the name can be found in the config.env file.
+    The name of your run. Exact instruction for how to format the name can be found in the `config.env` file.
 2.  DATASET_NAME\
     The name of the TCGA dataset you want the analysis to run on. Usually in the form of TCGA-XXXX
 3.  GENE_1/2\
@@ -24,11 +24,11 @@ Before running the workflow, it is important that you edit any of the required f
 
 Since we're running this on a desktop with multiple version of R, I ended up hacking something together to make sure not to install over other R versions/packages on the desktop. To run the analysis, follow these steps:
 
-1.  Navigate to the directory where `run_analysis.R` is located
+1.  Navigate to the directory where `run_analysis.R` is located (same as where you found this README)
 2.  Change all the required options in `config.env` - make sure to save when done!
 3.  Right click in the folder -\> Open in terminal
 4.  Type `./run_analysis.sh` into the terminal
-5.  Done!
+5.  Done! There will be some information on the progress in the terminal, including some estimates for how long it'll still take to complete.
 
 ## How metrics are calculated
 

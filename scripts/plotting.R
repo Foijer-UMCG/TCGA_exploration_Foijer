@@ -4,10 +4,19 @@ plot_results <- function(data,
                          gene_2,
                          dataset_name,
                          verbose = TRUE){
-
+  
+  # creates the dir so we can actually save stuff there
+  dir.create(results_dir, 
+             showWarnings = TRUE, 
+             recursive = TRUE)
+  
   # makes the plots for gene_1, which should always be present
   plot_name <- file.path(results_dir,
                          paste0(gene_1, "_expression.pdf"))
+  
+  #TODO remove this after debugging
+  print(plot_name)
+  
   if (verbose){
     print(glue::glue("Plotting {gene_1} expression density"))
   }  
