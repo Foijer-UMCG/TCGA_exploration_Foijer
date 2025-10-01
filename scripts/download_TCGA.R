@@ -36,7 +36,7 @@ download_dataset <- function(dataset_name,
   download_dir <- file.path(data_dir,
                             dataset_name)
   if (dir.exists(download_dir) & !force) {
-    msg <- glue::glue("Data already seems to be downloaded - feel free to continue workflow!")
+    msg <- glue::glue("Data is already downloaded - workflow continues.")
     print(msg)
     return("")
   }else{

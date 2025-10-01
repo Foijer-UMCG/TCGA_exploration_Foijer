@@ -1,4 +1,4 @@
-plot_gene_distro <- function(data, gene, plot_name = FALSE, cancer_type, return = FALSE) {
+plot_gene_distro <- function(data, gene, plot_name = FALSE, cancer_type) {
   p <- ggpubr::ggdensity(data,
                          x = gene,
                          add = "mean",
@@ -14,25 +14,6 @@ plot_gene_distro <- function(data, gene, plot_name = FALSE, cancer_type, return 
     ) +
     ggplot2::theme(axis.text = ggplot2::element_text(size = 20),
                    axis.title = ggplot2::element_text(size = 20))
-
-  if (return) {
-    return(p)
-  } else {
-    ggplot2::ggsave(
-      filename = plot_name,
-      plot = p,
-      unit = "in",
-      width = 14,
-      height = 7,
-      create.dir = TRUE,
-      useDingbat = FALSE)
-
-    RDS_name <- tools::file_path_sans_ext(plot_name)
-    RDS_name <- glue::glue(RDS_name, ".Rds")
-
-    saveRDS(object = p,
-            file = RDS_name)
-  }
 }
 
 plot_exp_boxplots <- function(data, gene, cancer_type, plot_name = FALSE, return = FALSE) {
@@ -53,29 +34,10 @@ plot_exp_boxplots <- function(data, gene, cancer_type, plot_name = FALSE, return
       comparisons = comparisons,
       label = "p.signif"
     ) +
-    ggpubr::stat_compare_means(label.x.npc = "top",
-                               label.y.npc = "left") +
+    ggpubr::stat_compare_means(label.x.npc = "left",
+                               label.y.npc = "top") +
     ggplot2::theme(text = ggplot2::element_text(size = 20),
                    axis.title = ggplot2::element_text(size = 20))
-
-  if (return) {
-    return(p)
-  } else {
-    ggplot2::ggsave(
-      filename = plot_name,
-      plot = p,
-      unit = "in",
-      width = 14,
-      height = 7,
-      create.dir = TRUE,
-      useDingbats = FALSE
-    )
-    RDS_name <- tools::file_path_sans_ext(plot_name)
-    RDS_name <- glue::glue(RDS_name, ".Rds")
-
-    saveRDS(object = p,
-            file = RDS_name)
-  }
 }
 
 plot_genes <- function(df, gene1, gene2, plot_name = FALSE, cancer_type, return = FALSE) {
@@ -97,26 +59,6 @@ plot_genes <- function(df, gene1, gene2, plot_name = FALSE, cancer_type, return 
   ) +
     ggplot2::theme(axis.text = ggplot2::element_text(size = 20),
                    axis.title = ggplot2::element_text(size = 20))
-
-
-  if (return) {
-    return(p)
-  } else {
-    ggplot2::ggsave(
-      filename = plot_name,
-      plot = p,
-      unit = "in",
-      width = 7,
-      height = 7,
-      create.dir = TRUE,
-      useDingbats = FALSE
-    )
-    RDS_name <- tools::file_path_sans_ext(plot_name)
-    RDS_name <- glue::glue(RDS_name, ".Rds")
-
-    saveRDS(object = p,
-            file = RDS_name)
-  }
 }
 
 plot_aneu_gene_scatter <- function(data, gene, aneuploidy, plot_name = FALSE, cancer_type, return = FALSE) {
@@ -140,23 +82,4 @@ plot_aneu_gene_scatter <- function(data, gene, aneuploidy, plot_name = FALSE, ca
   ) +
     ggplot2::theme(axis.text = ggplot2::element_text(size = 20),
                    axis.title = ggplot2::element_text(size = 20))
-
-  if (return) {
-    return(p)
-  } else {
-    ggplot2::ggsave(
-      filename = plot_name,
-      plot = p,
-      unit = "in",
-      width = 7,
-      height = 7,
-      create.dir = TRUE,
-      useDingbats = FALSE
-    )
-    RDS_name <- tools::file_path_sans_ext(plot_name)
-    RDS_name <- glue::glue(RDS_name, ".Rds")
-
-    saveRDS(object = p,
-            file = RDS_name)
-  }
 }

@@ -4,19 +4,31 @@
 
 Scripts for downloading, processing and plotting data from the TCGA/GDC. Specifically made in the context of using aneuploidy and matched RNA / genomic data for discovery of gene correlates to aneuploidy and Chromosomal INstability (CIN).
 
-Made by Alex van Kaam, PhD student. README last updated 26-09-2025
+Made by Alex van Kaam, PhD student. README last updated 30-09-2025
 
 ## Running the workflow
 
 Before running the workflow, it is important that you edit any of the required fields in the config.env file. The config.env file should be in the same directory as this README.md. The most important are:
 
-1.  DATA_DIR: where the data for TCGA is (or will be) downloaded. When running on the Aneufinder Desktop, this is already correctly configured.
-2.  RUN_NAME: the name of your running. Exact instruction for how to format the name can be found in the config.env file.
-3.  GENE_1/2: Which genes you want to use for correlation to aneuploidy. GENE_1 is required, GENE_2 is optional.
+1.  RUN_NAME\
+    The name of your run. Exact instruction for how to format the name can be found in the config.env file.
+2.  DATASET_NAME\
+    The name of the TCGA dataset you want the analysis to run on. Usually in the form of TCGA-XXXX
+3.  GENE_1/2\
+    Which genes you want to use for correlation to aneuploidy. GENE_1 is required, GENE_2 is optional.
+4.  SAMPLES_SELECTED\
+    What kind of samples you want the analysis to run on. One of:
+    1.  PRIMARY
+    2.  METASTATIC
+    3.  ALL
 
-Since we're running this on a desktop with multiple version of R, I ended up hacking together things a little bit to ensure I didn't change any package installs of other R versions on the desktop. To run the workflow, you'll need to run the *`run_analysis.sh`* script using a terminal. To do so, open a terminal in the directory where this README.md and the `run_analysis.sh` script are located. You can then type `./run_analysis.sh` to start Rstudio with the correct version of R.
+Since we're running this on a desktop with multiple version of R, I ended up hacking something together to make sure not to install over other R versions/packages on the desktop. To run the analysis, follow these steps:
 
-Once you've got Rstudio running, navigate to the *`run_analysis.Rmd`* markdown document. In the top right of the coding window of Rstudio there's a "run" button. Select that, and then press "Run All". The keyboard shortcut for this is Ctrl+Alt+R.
+1.  Navigate to the directory where `run_analysis.R` is located
+2.  Change all the required options in `config.env` - make sure to save when done!
+3.  Right click in the folder -\> Open in terminal
+4.  Type `./run_analysis.sh` into the terminal
+5.  Done!
 
 ## How metrics are calculated
 
@@ -24,9 +36,7 @@ Once you've got Rstudio running, navigate to the *`run_analysis.Rmd`* markdown d
 
 Aneuploidy in the TCGA is measured as the seg.means, the deviation from the standard 2n (assumed) profile. We calculate this to an aneuploidy score using the following formulas. First, we convert the seg.means per bin into a CN per bin:
 
-$$CN = (2^{seg\_mean}) *2 $$
-
-After applying that formula we have an aneuploidy score for every bin. We can then calculate the general aneuploidy of the sample by weighting the aneuploidy score by the length of the bin:
+$$CN = (2^{seg\_mean}) *2 $$ After applying that formula we have an aneuploidy score for every bin. We can then calculate the general aneuploidy of the sample by weighting the aneuploidy score by the length of the bin:
 
 $$aneuploidy = \displaystyle\sum_{b}^{B}  \frac{(CN - 2) * L_b}{L}$$ Where b is a bin in the genomic profile, and B all the bins. L is the total length of the genome with L_b meaning the length of the bin we're calculating. Since we're assuming a base ploidy of 2 (human) we substract 2 from the calculated CN, as that would then be the deviation from the normal copy number. For those paying close attention - since seg.means is a fraction, we can have copy numbers that deviate from a discrete integer (1,2,3, etc.) and can mean that the CN can be 2.03, for example. In the grand scheme of things this doesn't seem to really matter, but for the sake of being complete we calculate both a non-rounded (with non-integer CN such as 2.03) and a rounded (requiring CN to be an integer). For downstream analysis we use the non-rounded number. Send me a message if you think this is wrong, I would be open to changing that implementation.
 
