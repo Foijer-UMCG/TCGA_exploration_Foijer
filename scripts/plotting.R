@@ -12,22 +12,24 @@ plot_results <- function(data,
   
   # makes the plots for gene_1, which should always be present
   plot_name <- file.path(results_dir,
-                         paste0(gene_1, "_expression.pdf"))
-  
-  #TODO remove this after debugging
-  print(plot_name)
+                         paste0(gene_1, "_expression"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_1} expression density"))
-  }  
+  }
   
+  # plots both a PDF and PNG - PNG for easier embedding in powerpoints
   plot_gene_distro(data = data,
                    gene = gene_1,
-                   plot_name = plot_name,
+                   plot_name = paste0(plot_name, ".pdf"),
+                   cancer_type = dataset_name)
+  plot_gene_distro(data = data,
+                   gene = gene_1,
+                   plot_name = paste0(plot_name, ".png"),
                    cancer_type = dataset_name)
   
   plot_name <- file.path(results_dir,
-                         paste0(gene_1, "_expression_boxplots.pdf"))
+                         paste0(gene_1, "_expression_boxplots"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_1} expression boxplot"))
@@ -35,10 +37,15 @@ plot_results <- function(data,
   plot_exp_boxplots(data = data,
                     gene = gene_1,
                     cancer_type = dataset_name,
-                    plot_name = plot_name)
-
+                    plot_name = paste0(plot_name, " .pdf"))
+  plot_exp_boxplots(data = data,
+                    gene = gene_1,
+                    cancer_type = dataset_name,
+                    plot_name = paste0(plot_name, " .png"))
+  
+  
   plot_name <- file.path(results_dir,
-                         paste0(gene_1, "_aneuploidy_corr.pdf"))
+                         paste0(gene_1, "_aneuploidy_corr"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_1} against aneuploidy scatterplot"))
@@ -46,7 +53,12 @@ plot_results <- function(data,
   plot_aneu_gene_scatter(data = data,
                          gene = gene_1,
                          aneuploidy = "aneuploidy",
-                         plot_name = plot_name,
+                         plot_name = paste0(plot_name, " .pdf"),
+                         cancer_type = dataset_name)
+  plot_aneu_gene_scatter(data = data,
+                         gene = gene_1,
+                         aneuploidy = "aneuploidy",
+                         plot_name = paste0(plot_name, " .png"),
                          cancer_type = dataset_name)
 
   # early exit in case gene_2 was left empty, we can't make the other plots
@@ -55,7 +67,7 @@ plot_results <- function(data,
   }
 
   plot_name <- file.path(results_dir,
-                         paste0(gene_2, "_expression.pdf"))
+                         paste0(gene_2, "_expression"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_2} expression density"))
@@ -63,23 +75,31 @@ plot_results <- function(data,
   
   plot_gene_distro(data = data,
                    gene = gene_2,
-                   plot_name = plot_name,
+                   plot_name = paste0(plot_name, ".pdf"),
+                   cancer_type = dataset_name)
+  plot_gene_distro(data = data,
+                   gene = gene_2,
+                   plot_name = paste0(plot_name, ".png"),
                    cancer_type = dataset_name)
   
   plot_name <- file.path(results_dir,
-                         paste0(gene_2, "_expression_boxplots.pdf"))
+                         paste0(gene_2, "_expression_boxplots"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_2} expression boxplots"))
   }
   
   plot_exp_boxplots(data = data,
-                     gene = gene_2,
-                     cancer_type = dataset_name,
-                     plot_name = plot_name)
+                    gene = gene_2,
+                    cancer_type = dataset_name,
+                    plot_name = paste0(plot_name, ".pdf"))
+  plot_exp_boxplots(data = data,
+                    gene = gene_2,
+                    cancer_type = dataset_name,
+                    plot_name = paste0(plot_name, ".png"))
   
   plot_name <- file.path(results_dir,
-                         paste0(gene_2, "_aneuploidy_corr.pdf"))
+                         paste0(gene_2, "_aneuploidy_corr"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_2} against aneuploidy scatterplot"))
@@ -88,14 +108,19 @@ plot_results <- function(data,
   plot_aneu_gene_scatter(data = data,
                          gene = gene_2,
                          aneuploidy = "aneuploidy",
-                         plot_name = plot_name,
+                         plot_name = paste0(plot_name, ".pdf"),
+                         cancer_type = dataset_name)
+  plot_aneu_gene_scatter(data = data,
+                         gene = gene_2,
+                         aneuploidy = "aneuploidy",
+                         plot_name = paste0(plot_name, ".png"),
                          cancer_type = dataset_name)
   
   plot_name <- file.path(results_dir,
                          paste0(gene_1,
                                 "_",
                                 gene_2,
-                                "_corr_plot.pdf"))
+                                "_corr_plot"))
   
   if (verbose){
     print(glue::glue("Plotting {gene_1} expression against {gene_2} expression"))
@@ -104,7 +129,12 @@ plot_results <- function(data,
   plot_genes(df = data,
              gene1 = gene_1,
              gene2 = gene_2,
-             plot_name = plot_name,
+             plot_name = paste0(plot_name, ".pdf"),
+             cancer_type = dataset_name)
+  plot_genes(df = data,
+             gene1 = gene_1,
+             gene2 = gene_2,
+             plot_name = paste0(plot_name, ".png"),
              cancer_type = dataset_name)
   
   return("Finished plotting for 2 genes")
