@@ -1,4 +1,4 @@
-#TODO some of the order of operations needs to change to make future debugging 
+#TODO some of the order of operations needs to change to make future debugging
 # easier. Would also allow multiple analyses to run in parallel, as currently
 # the terminal used to run this will be occupied and only copy things like
 # the config last, meaning it cannot be changed while the run is ongoing.
@@ -43,49 +43,17 @@ protein <- as.logical(Sys.getenv("PROTEIN"))
 force <- as.logical(Sys.getenv("FORCE"))
 verbose <- as.logical(Sys.getenv("VERBOSE"))
 download <- as.logical(Sys.getenv("DOWNLOAD_DATA"))
-
-if (download){
-  #TODO add internal check for download_dataset if the data already exist
-  msg <- download_dataset(dataset_name = dataset_name,
-                          data_dir = data_dir,
-                          transcriptome = transcriptome,
-                          CNV = CNV,
-                          protein = protein,
-                          clinical = clinical,
-                          force = force,
-                          verbose = verbose)
-  print(msg)
-}
-
-# more parsing for the preprocessing steps
-#TODO - add automatic recognition of gene names against gene_names.txt
-# for easier error handling
 gene_1 <- Sys.getenv("GENE_1")
 gene_2 <- Sys.getenv("GENE_2")
 GSEA <- as.logical(Sys.getenv("GSEA"))
 samples <- Sys.getenv("SAMPLES_SELECTED")
 run_name <- Sys.getenv("RUN_NAME")
 
-# preprocess the data, matching RNA to CNV samples
-data <- process_data(run_name = run_name,
-                     gene_1 = gene_1,
-                     gene_2 = gene_2,
-                     GSEA = GSEA,
-                     transcriptome = transcriptome,
-                     CNV = CNV,
-                     protein = protein,
-                     samples = samples,
-                     data_dir = data_dir,
-                     dataset_name = dataset_name,
-                     verbose = verbose)
-
-#TODO move these further to the top of the file in case a run gets interrupted
-# that way it would be easier to debug, as we're missing outputs otherwise
 # prepares some of the output documentation
-# prepares for outputs
 results_dir <- file.path(data_dir,
                          dataset_name,
                          run_name)
+# copies the config file to the output for later reference
 file.copy(from = "config.env",
           to = results_dir,
           recursive = FALSE)
@@ -93,16 +61,59 @@ file.copy(from = "config.env",
 plot_dir <- file.path(results_dir,
                       "plots")
 
+# splits the dataset names if multiple were given
+if (grepl(pattern = ",", x = dataset_name)){
+  dataset_name <- unlist(strsplit(dataset_name, ","))
+}
+
+# inits a list we'll use for binding the data together
+data_list <- list()
+
+# we loop over all the datasets if there are multiple
+for (dataset in dataset_name){
+  msg <- glue::glue("Beginning processing of {dataset}")
+  if (verbose){print(msg)}
+  if (download){
+    msg <- download_dataset(dataset_name = dataset_name,
+                            data_dir = data_dir,
+                            transcriptome = transcriptome,
+                            CNV = CNV,
+                            protein = protein,
+                            clinical = clinical,
+                            force = force,
+                            verbose = verbose)
+    if (verbose){print(msg)}
+  }
+
+  # preprocess the data, matching RNA to CNV samples
+  data <- process_data(run_name = run_name,
+                       gene_1 = gene_1,
+                       gene_2 = gene_2,
+                       GSEA = GSEA,
+                       transcriptome = transcriptome,
+                       CNV = CNV,
+                       protein = protein,
+                       samples = samples,
+                       data_dir = data_dir,
+                       dataset_name = dataset_name,
+                       verbose = verbose)
+
+  # adds the data to a named list for binding together later
+  data_list[dataset] <- data
+}
+data <- data.table::rbindlist(data_list)
+
+
+# writes the raw data for later troubleshooting
 raw_data_filename <- file.path(results_dir,
                                "processed_data.csv")
 write.csv(data,
           file = raw_data_filename)
 
-if (verbose){
-  print("Wrote raw data to output directory")
-}
+if (verbose){print("Wrote raw data to output directory")}
 
 # does the plotting
+#TODO allow the dataset_name argument to become just the name of the first or "combined"
 plotting_message <- plot_results(data = data,
                                  results_dir = plot_dir,
                                  gene_1 = gene_1,
@@ -110,8 +121,6 @@ plotting_message <- plot_results(data = data,
                                  dataset_name = dataset_name,
                                  verbose = verbose)
 
-if (verbose){
-  print(plotting_message)
-}
+if (verbose){print(plotting_message)}
 
 print(glue::glue("Done! You can find your plots in:\n{plot_dir}"))
